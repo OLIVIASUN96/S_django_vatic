@@ -1,0 +1,32 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+
+{% block header %}
+ <h3>注册新用户</h3>
+{% endblock header %}
+
+
+{% block content %}
+
+  {% if form.non_field_errors %}
+  <div class="messages">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      {{ form.non_field_errors }}
+  </div>
+  {% endif %}
+   
+  <form method="post" action="{% url 'userApp:register' %}" >
+      {% csrf_token %}
+      {% bootstrap_form form %}
+       
+    {% buttons %}
+      <button name="submit" class="btn btn-primary">register</button>
+    {% endbuttons %}
+
+      <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
+  </form> 
+
+  {% endblock content %}
+
+
