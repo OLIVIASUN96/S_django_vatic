@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'learning.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'VADB',   
+        'NAME': 'zqdata',   
         'USER': 'root',
         'PASSWORD': ' ',    
         'HOST': '127.0.0.1',
