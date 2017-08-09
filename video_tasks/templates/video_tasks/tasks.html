@@ -1,0 +1,22 @@
+{% extends "video_tasks/base.html" %}
+
+{% block header %}
+  <h1>Tasks</h1>
+{% endblock header %}
+
+
+{% block content %}
+
+<ul>
+    {% for task in tasks %}
+    <li><h3>
+      <a href="{% url 'video_tasks:task' task.id %}">{{ task }}
+      </a></h3>
+    </li>
+    {% empty %}
+      <li>No tasks have been added yet.</li>
+    {% endfor %}
+</ul>
+<h3><a href="{% url 'video_tasks:new_task' %}">Add a new task:</a></h3>
+
+{% endblock content %}

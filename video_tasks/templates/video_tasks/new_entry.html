@@ -1,0 +1,14 @@
+{% extends "video_tasks/base.html" %}
+
+{% block content %}
+
+  <p><a href="{% url 'video_tasks:task' task.id %}" method='post'></a></p>
+
+  <p>Add a new entry:</p>
+  <form action="{% url 'video_tasks:new_entry' task.id %}" method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name='submit'>add entry</button>
+  </form>
+
+{% endblock content %}

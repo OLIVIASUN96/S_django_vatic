@@ -1,4 +1,4 @@
-{% extends "learning_logs/base.html" %}
+{% extends "video_tasks/base.html" %}
 {% load bootstrap3 %}
 
 {% block header %}
@@ -15,7 +15,7 @@
       <button name="submit" class="btn btn-primary">Log in</button>
     {% endbuttons %}
   
-    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}"/>
+    <input type="hidden" name="next" value="{% url 'video_tasks:index' %}"/>
   </form>
 
 {% endblock content %}

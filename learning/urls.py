@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import  include, url 
 from django.contrib import admin
-from learning_logs import views
+from video_tasks import views
 from userApp import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^userApp/',include('userApp.urls',namespace='userApp')),
-    url(r'',include('learning_logs.urls',namespace='learning_logs')),
+    url(r'',include('video_tasks.urls',namespace='video_tasks')),
 ]
 
 
