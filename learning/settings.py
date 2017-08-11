@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'learning.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'zqdata',   
+        'NAME': 'VADB',   
         'USER': 'root',
         'PASSWORD': ' ',    
         'HOST': '127.0.0.1',
@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC' #+8hours shanghai
 
 USE_I18N = True
 
