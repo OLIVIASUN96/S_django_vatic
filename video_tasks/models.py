@@ -9,16 +9,24 @@ class Task(models.Model):
     text=models.CharField(max_length=200)
     date_added=models.DateTimeField(auto_now_add=True)
     owner=models.ForeignKey(User)
-
     def __str__(self):
         return self.text
-
+    
 
 class Entry(models.Model):
+    FINISHED = 1
+    NEED_MODIFY = 2
+    RELABEL = 3
+    ADMIN_CHOICES = (
+        (FINISHED, 'Task Done'),
+        (NEED_MODIFY, 'Still need to modify'),
+        (RELABEL, 'Need Redo'),
+    )
+    result = models.PositiveSmallIntegerField(choices=ADMIN_CHOICES, null=True, blank=True)
     task=models.ForeignKey(Task)
     text=models.TextField()
     date_added=models.DateField(auto_now=True)
-
+    
     class Meta:
         verbose_name_plural='entries'
 
