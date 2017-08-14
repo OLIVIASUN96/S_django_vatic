@@ -28,17 +28,20 @@
             <li><a href="{% url 'video_tasks:tasks' %}">任务列表</a></li>
           </ul>
           
-          <ul class="nav navbar-nav navbat-right">
+          
+          <ul class="nav navbar-nav">
+            <li><a href="/admin">管理员登录</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-              <li><a>{{ username }}</a></li>
+              <li>
+                <a>{{ user.profile.get_screen_name }}</a>
+              </li>
               <li><a href="{% url 'userApp:logout' %}">注销用户</a></li>
             {% else %}
               <li><a href="{% url 'userApp:register' %}">注册</a></li>
               <li><a href="{% url 'userApp:login' %}">登录</a></li>
             {% endif %}
-          </ul>
-          <ul class="nav navbar-nav">
-            <li><a href="{% url 'video_tasks:admin' %}">管理员登录</a></li>
           </ul>
         </div> <!--/.nav-collapse-->
 
