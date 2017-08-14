@@ -22,7 +22,7 @@ def logout_view(request):
 class RegisterView(FormView):
     template_name = 'userApp/register.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('lvideo_tasks:index')
+    success_url = reverse_lazy('video_tasks:index')
 
     def form_valid(self, form):
         form.save()
