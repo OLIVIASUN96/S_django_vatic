@@ -13,8 +13,8 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request,'video_tasks/index.html')
 
-def admin(request):
-    return HttpResponseRedirect(reverse('/admin'))
+# def admin(request):
+#     return HttpResponseRedirect(reverse('/admin'))
 
 # def check_task_owner(request,task):
 #     if task.owner==request.user:
