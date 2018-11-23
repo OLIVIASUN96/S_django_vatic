@@ -1,3 +1,3 @@
 
 # S_django_vatic
-b32149960c267bf5150de7cad271912173ad8ba1
+vatic tools written by django framework
