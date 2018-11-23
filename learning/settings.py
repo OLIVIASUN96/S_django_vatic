@@ -25,7 +25,7 @@ SECRET_KEY = '*s^6f1mln4(%(v37&h+j3zbvkveibx_9wcu61n#utu1((r_l0t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,13 +43,15 @@ INSTALLED_APPS = [
     'video_tasks',
     'userApp',
     'learning.core',
+    'CITIS',
+    'pyvision',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -82,9 +84,9 @@ WSGI_APPLICATION = 'learning.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'zqdata',   
+        'NAME': 'vatic',   
         'USER': 'root',
-        'PASSWORD': ' ',    
+        'PASSWORD': 'sunzhimin1996',    
         'HOST': '127.0.0.1',
     }
 }
@@ -132,7 +134,9 @@ STATIC_URL = '/static/'
 
 
 #my set
-AUTH_PROFILE_MODULE = 'mysite.core.Profile'
+#AUTH_PROFILE_MODULE = 'mysite.core.Profile'
+#AUTH_PROFILE_MODULE = 'profiles.UserProfile'
+AUTH_PROFILE_MODULE = 'userApp.CITIS_users'
 
 LOGIN_URL='/userApp/login/'
 
@@ -140,6 +144,18 @@ LOGIN_URL='/userApp/login/'
 BOOTSTRAP3={
     'include_jquery':True 
 }
+
+
+EMAIL_HOST = "smtp.163.com"   # 服务器
+EMAIL_PORT = 25               # 一般情况下都为25
+EMAIL_HOST_USER = "sunzhimin1996@163.com"   # 账号
+EMAIL_HOST_PASSWORD = "thirdparty96"  # 密码
+EMAIL_USE_TLS = False             # 一般都为False
+EMAIL_FROM = EMAIL_HOST_USER        # 邮箱来自
+
+
+
+
 
 #heroku setting
 if os.getcwd()=='/learning':

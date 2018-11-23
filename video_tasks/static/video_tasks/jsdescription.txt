@@ -1,0 +1,17 @@
+track.js 画框
+job.js 任务 job job_import
+videoplayer.js 视频播放 
+preload.js Preloads an array of images and calls onprogress.
+object.js 跟标注有关
+ui.js 界面   显示saving... saved
+instruction.js 指示
+bootstrap.js: 有跟id相关的    
+function dispatch(training)
+{
+      training = training ? 1 : 0;
+      server_request("getjob", [parameters["id"], training], function(data) {
+          loadingscreen(job_import(data));
+      });
+}
+
+如果parameter没有id,显示对vatic的介绍

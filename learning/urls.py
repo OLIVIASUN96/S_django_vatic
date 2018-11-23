@@ -18,10 +18,14 @@ from django.contrib import admin
 from video_tasks import views
 from userApp import views
 
+app_name=["userApp","video_tasks"]
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^userApp/',include('userApp.urls',namespace='userApp')),
-    url(r'',include('video_tasks.urls',namespace='video_tasks')),
+    #url(r'^userApp/',include('userApp.urls',namespace='userApp')),
+    url(r'^userApp/',include('userApp.urls')),
+    #url(r'',include('video_tasks.urls',namespace='video_tasks')),
+    url(r'',include('video_tasks.urls')),
 ]
 
 

@@ -1,4 +1,4 @@
-{% extends "video_tasks/base.html" %}
+{% extends "video_tasks/base1.html" %}
 {% load bootstrap3 %}
 
 
@@ -25,6 +25,7 @@
     {% endbuttons %}
 
       <input type="hidden" name="next" value="{% url 'video_tasks:index' %}" />
+     
   </form> 
 
   {% endblock content %}

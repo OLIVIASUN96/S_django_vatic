@@ -1,7 +1,10 @@
-{% extends "video_tasks/base.html" %}
+{% extends "video_tasks/base1.html" %}
 {% load bootstrap3 %}
 
 {% block header %}
+   <div class='jumbotron'>
+      <h1>视频标记管理系统</h1>
+  </div>
   <h2>用户登录</h2>
 {% endblock header %}
 
@@ -14,8 +17,8 @@
     {% buttons %}
       <button name="submit" class="btn btn-primary">Log in</button>
     {% endbuttons %}
-  
-    <input type="hidden" name="next" value="{% url 'video_tasks:index' %}"/>
+    <input type="hidden" name="next" value="{% url 'video_tasks:welcome' %}"/>
   </form>
-
+  <h3>
+    <a href="{% url 'userApp:register' %}">注册新用户</a> </h3>
 {% endblock content %}

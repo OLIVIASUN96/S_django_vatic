@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>视频标记</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="\static\video_tasks\vendor\bootstrap\css\bootstrap.min.css" type="text/css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="\static\video_tasks\vendor\metisMenu\metisMenu.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="\static\video_tasks\dist\css/sb-admin-2.css" type="text/css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="\static\video_tasks\vendor\morrisjs\morris.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="\static\video_tasks\vendor\font-awesome\css\font-awesome.min.css" type="text/css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+    function test(x){
+       $.ajax({
+               type:"get",
+               url:"/test/",
+               
+               success:function(d){
+                   if(d=="success"){
+                	   alert('OK');//除成功提示
+                   }
+                   if(d=="error"){
+                	  alert('something goes wrong');//删除异常提示
+                   }
+                  
+               }
+        });       
+    }
+
+    function load(x){	 
+       var description = document.getElementById("description");
+ 	   var myfiles=new Array();
+ 	   var fileList=document.getElementById("myfiles").files;    
+        for(var i=0;i<fileList.length;i++){
+     	   myfiles.push(fileList[0].name);
+        }
+ 	   var labels = new Array();
+ 	   var objNameList=document.getElementsByName("labels");    
+ 	   if(null!=objNameList){
+ 	        for(var i=0;i<objNameList.length;i++){
+ 	            if(objNameList[i].checked)
+ 	            	labels.push(objNameList[i].value);
+ 	        }
+ 	   }
+
+ 	   layer.confirm('您确认要上传吗', {
+ 		   btn: ['是','否'] //按钮
+ 		 }, function(){	
+ 			layer.load(3, {
+ 				   shade: [0.3,'#fff'] //0.1透明度的白色背景
+ 				});
+ 		   $.ajax({
+                type:"post",
+                url:"/auditor_videouploaded/",
+                traditional:true, //必须加，阻止深度序列化
+                data: {"myfiles":myfiles,"labels":labels,"description":description.value},//表单数据
+                success:function(d){
+                    if(d=="success"){
+                 	   layer.msg('上传成功', {
+               		     time: 1000, //20s后自动关闭		    
+               		   });//上传成功提示
+                    }
+                    if(d=="error"){
+                 	   layer.msg('上传异常', {
+                 		     time: 1000, //20s后自动关闭		    
+                 	    });//上传异常提示
+                    }
+                    window.parent.location.reload(); //刷新父页面
+                    var index = parent.layer.getFrameIndex(window.name);  //关闭弹窗
+                    setTimeout(function(){parent.layer.close(index)}, 1000);                 
+                }
+         });  
+ 		 }, function(){
+ 		   layer.msg('取消上传', {
+ 		     time: 1000, //20s后自动关闭		    
+ 		   });
+ 		 });
+     }
+    
+    
+    function working(x){
+ 	   layer.load(3, {
+ 		   shade: [0.3,'#fff'] //0.1透明度的白色背景
+ 		 });
+    }
+   </script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">视频标记系统</a>
+                <a class="navbar-brand">欢迎您，{{ user.profile.role }} {{ user.profile.get_screen_name }}</a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+              <a class="navbar-brand" href="/userApp/logout">注销用户</a>             
+            </ul>         
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">                     
+                       <li>
+                            <a href="/admin_welcome">欢迎页</a>
+                        </li>                      
+                        <li>
+                            <a href="/userApp/Usersinfo">用户管理</a>
+                        </li>
+                        <li>
+                            <a href="/manage_video">视频管理</a>
+                        </li>
+                        <li>
+                            <a href="/manage_job">任务管理</a>
+                        </li>
+                        <li>
+                            <a href="/manage_data">数据管理</a>
+                        </li>
+                        <li>
+                            <a href="/auditor_videoupload">视频上传</a>
+                        </li>                                                         
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">评估测试</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <form class="form-horizontal" id="form1" action="/auditor_videouploaded">
+    <fieldset>
+      <div id="legend" class="">
+        
+      </div>   
+      
+      <div class="control-group">
+          <label class="control-label col-sm-5">选择模型</label>
+
+    <div class="control-group">
+          <label class="control-label "></label>
+
+          <!-- File Upload -->
+          <input type="file" name="myfiles" id="myfiles" multiple="" /> 
+          <!-- File Upload -->
+          <input type="button" value="test_S" onclick="test(2)" id="test_S"> 
+
+        </div>
+    </div>
+    <br>
+  
+    </div><br>
+    <div class="control-group">
+          <!-- Text input-->
+         
+          <div class="controls col-sm-3">
+           
+            <textarea cols="40" rows="1" name="identifier" id="record_dir" placeholder="record_dir"></textarea>
+            <textarea cols="40" rows="1" name="identifier" id="data_dir" placeholder="data_dir"></textarea>
+            <p class="help-block"></p>
+          </div>
+    </div><br>
+    
+    
+   
+    
+    <div class="control-group">          
+          <!-- Button -->
+          <div class="controls col-sm-offset-5 col-sm-1">
+            <input type="button" value="开始评估" onclick="" id="cancel">
+          </div>
+    </div>
+    
+    <div class="control-group">          
+          <!-- Button -->
+          <div class="controls  col-sm-1">
+            <input type="button" value="取消" onclick="" id="loading">
+          </div>
+    </div>
+    <div class="control-group">          
+          <!-- Button -->
+          <div class="controls  col-sm-1">
+            <input type="button" value="图片质量评估" onclick="" id="loading">
+          </div>
+    </div>
+
+    </fieldset>
+  </form>
+                            
+                           
+      </div>
+            Copyright &copy; 2018.Company name All rights reserved.
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="\static\video_tasks\vendor\jquery\jquery.min.js"></script>
+
+    
+    <!-- Bootstrap Core JavaScript -->
+    <script src="\static\video_tasks\vendor\bootstrap\js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="\static\video_tasks\vendor\metisMenu\metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="\static\video_tasks\vendor\raphael\raphael.min.js"></script>
+    <script src="\static\video_tasks\vendor\morrisjs\morris.min.js"></script>
+    <script src="\static\video_tasks\data\morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="\static\video_tasks\dist\js\sb-admin-2.js"></script>
+
+    <!-- layer -->
+    <script type="text/javascript" src="\static\video_tasks\layer\layer.js"></script>
+</body>
+
+</html>
