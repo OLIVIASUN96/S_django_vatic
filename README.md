@@ -1,0 +1,1 @@
+# S_django_vatic
