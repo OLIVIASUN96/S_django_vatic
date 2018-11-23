@@ -1,7 +1,3 @@
-# Django-Vatic
-using Django to build a User Admin Aystem for VaticTool
 
-
-Django 1.11.3
-python 3.5
-
+# S_django_vatic
+b32149960c267bf5150de7cad271912173ad8ba1
